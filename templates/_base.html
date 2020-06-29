@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+{% load static %}
+{% load icon %}
+<html>
+    <head>
+        <title>{% block title %}echen's blog{% endblock title %}</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" />
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <script>
+            let darkmode = localStorage.getItem('darkmode');
+            var toggle = document.querySelector('#checkBox')
+            
+            if (darkmode === 'enabled') {
+                document.body.classList.add('dark-mode');
+
+                
+                window.onload = function() {
+                    var toggle = document.querySelector('#checkBox')
+                    var slider = document.querySelector('#slider')
+                    
+                
+                    
+                                        
+                    toggle.checked=true;
+                   
+                    
+                   
+                }
+                
+            }
+            
+        </script>
+
+        <div class="container">
+            <h1 id="title" class="display-2 text-center"><a class="text-info" href="{% url 'home' %}">echen's blog</a></h1>
+            <p class="text-center text-info">Proud member of the Cool Club. </p>
+            <div class="dots">
+                <span class="dot" style="background-color:#d9534f;"></span>
+                <span class="dot" style="background-color:#ff8f17;"></span>
+                <span class="dot" style="background-color:#f0ad4e;"></span>
+                <span class="dot" style="background-color:#5cb85c;"></span>
+                <span class="dot" style="background-color:#5bc0de;"></span>
+                <span class="dot" style="background-color:#a45fed;"></span>
+            </div>
+            <span style="float:right;">
+            <label class="switch">
+                <input id="checkBox" type="checkbox">
+                <span id="slider" class="slider round"></span>
+              </label>
+              <br>
+            </span>
+            <br>
+            
+            
+            {% block content %}
+            {% endblock content %}
+            <footer class="page-footer font-small pt-4 mb-4">
+
+                <!-- Footer Elements -->
+                <div class="container">
+              
+                  <!-- Social buttons -->
+                  <ul class="list-unstyled list-inline text-center">
+                    <li class="list-inline-item">
+                        <a class="btn-floating mx-1 text-info" href="http://echen.io" target="_blank">
+                          {% icon 'home' %}
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a class="btn-floating mx-1 text-info" href="https://github.com/cloudui/" target="_blank">
+                          {% icon 'github' %}
+                        </a>
+                      </li>
+                    <li class="list-inline-item">
+                      <a class="btn-floating mx-1 text-info" href="https://instagram.com/violeric/" target="_blank">
+                        {% icon 'instagram' %}
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a class="btn-floating mx-1 text-info" href="https://twitter.com/below_ocean/" target="_blank">
+                        {% icon 'twitter' %}
+                      </a>
+                    </li>
+                   
+                    
+                    
+                  </ul>
+                  <!-- Social buttons -->
+              
+                </div>
+                
+              </footer>
+        </div>
+
+
+        
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/shortcuts/infinite.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+
+        <script>
+            
+
+
+            const enableDarkMode = () => {
+              document.body.classList.add('dark-mode');
+              localStorage.setItem('darkmode','enabled');
+            
+              
+              
+            };
+            const disableDarkMode = () => {
+                document.body.style.transition = ".3s"
+              document.body.classList.remove('dark-mode'); 
+              localStorage.setItem('darkmode', null);
+            
+            };
+
+                   
+
+            $('#checkBox').click(function(e){
+                darkmode = localStorage.getItem('darkmode');
+                
+                
+                
+                if (darkmode !== 'enabled') {
+                
+                    enableDarkMode();
+                    
+                } else {
+                    
+                    disableDarkMode();
+                }
+                
+                })
+            
+            
+        </script>
+        {% block script %}
+        
+        {% endblock script %}
+    </body>
+</html>

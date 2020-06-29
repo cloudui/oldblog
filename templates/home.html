@@ -1,0 +1,62 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+
+
+<br>
+
+<form autocomplete="off" class="example" action="{% url 'search_results' %}" method="get" style="float:right;max-width:300px;">
+    <input name="ques" type="text" placeholder="Search.." name="search2">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+  <br>
+ <br>
+ <div class="infinite-container">
+
+{% for post in posts %}
+<div class="infinite-item">
+
+<h3 class="mb-0 mt-4"><strong><a class="text-info" href="{% url 'detail' post.slug %}">{{ post.title }}</a></strong></h3>
+<p class="text-secondary">{{ post.date_short }}</p>
+
+<p class="body-text lead">{{ post.body_trimmed|safe|urlize }}</p>
+<p><a class="text-info" href="{% url 'detail' post.slug %}">Continue Reading</a></p>
+<br>
+</div>
+{% endfor %}
+ </div>
+
+ {% if page_obj.has_next %}
+                <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+                {% endif %}
+                <div class="d-flex justify-content-center" style="display:none;">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+{% endblock content %}
+
+{% block script %}
+  <script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        handler: function(direction) {
+
+    },
+    offset: 'bottom-in-view',
+
+    onBeforePageLoad: function () {
+    $('.spinner-border').show();
+    },
+    onAfterPageLoad: function () {
+    $('.spinner-border').hide();
+    }
+
+    });
+    $('.infinite-more-link').on('click', function(e) {
+    e.preventDefault();
+    infinite.waypoint.trigger();
+});
+</script>
+  {% endblock script %}

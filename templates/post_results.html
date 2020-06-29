@@ -1,0 +1,40 @@
+{% extends '_base.html' %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% block content %}
+
+
+<br>
+
+<form autocomplete="off" class="example" action="{% url 'search_results' %}" method="get" style="float:right;max-width:300px;">
+    <input name="ques" type="text" placeholder="Search.." name="search2">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+  <br>
+ <br>
+
+
+{% if not post_results %}
+<br>
+<h3>Oops, your search for “{{ search }}” didn't return any results.</h3><br>
+
+<br><br><br>
+{% elif post_results.count == 1 %}
+<br>
+<h2>{{ post_results.count }} matching result for "{{ search }}"</h2>
+{% else %}
+<br>
+<h2>{{ post_results.count }} matching results for "{{ search }}"</h2>
+{% endif %}
+
+{% for post in post_results reversed %}
+
+<h3 class="mb-0 mt-4"><strong><a class="text-info" href="{% url 'detail' post.slug %}">{{ post.title }}</a></strong></h3>
+<p class="text-secondary">{{ post.date_short }}</p>
+
+<p class="body-text lead">{{ post.body_trimmed|safe|urlize }}</p>
+<p><a class="text-info" href="{% url 'detail' post.slug %}">Continue Reading</a></p>
+<br>
+{% endfor %}
+{% endblock content %}

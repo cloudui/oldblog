@@ -1,0 +1,30 @@
+{% extends '_base2.html' %}
+{% load icon %}
+
+
+{% block title %}{{ object.title }} &middot; blog.echen.io{% endblock title %}
+
+{% block content %}
+<p class="lead text-secondary">{% icon 'arrow-left' height="18" width="18" class="text-secondary" %} <a class="text-secondary" href="{% url 'home' %}"> Posts</a></p>
+<h1>{{ object.title }}</h1>
+<p class="text-secondary lead">{{ object.date_short }}</p>
+<br>
+{% if object.thumbnail %}
+<span class="img-container">
+    <figure>
+    <img class="img-size" src="{{ object.thumbnail.url }}" alt="{{ object.title }}">
+    {% if object.caption_url %}
+    <figcaption><span class="text-muted"><small>Courtesy of <a class="text-muted" href="{{ object.caption_url }}" target="_blank">{{ object.caption_url }}</a></small></span></figcaption>
+    {% endif %}
+</figure>
+</span>
+<br>
+
+{% endif %}
+
+
+
+<p class="body-text lead">{{ post.body|safe|urlize }}</p>
+<br>
+
+{% endblock %}
