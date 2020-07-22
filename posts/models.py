@@ -1,14 +1,16 @@
 from django.db import models
-
+from tinymce.models import HTMLField
 
 class Post(models.Model):
     title = models.CharField(max_length=250, default="")
 
-    body = models.TextField()
+    body = HTMLField(blank=True)
 
     date_published = models.DateTimeField(auto_now_add=True)
     
     slug = models.CharField(max_length=1000, null=True)
+
+    visible = models.BooleanField(default=True)
 
     thumbnail = models.ImageField(upload_to='images', blank=True)
     caption_url = models.URLField(blank=True)
@@ -22,11 +24,13 @@ class Post(models.Model):
         return self.date_published.strftime("%b %d, %Y")
 
     def body_trimmed(self):
-        br_first_index = self.body.find('<br>')
+        br_first_index = self.body.find('</p>')
         if br_first_index != -1:
-            return self.body[0:br_first_index]
+            return self.body[0:(br_first_index + 4)]
         
         return self.body
+
+
 
     
     def __str__(self):

@@ -1,0 +1,20 @@
+{% extends '_base2.html' %}
+{% load static %}
+{% load icon %}
+
+{% block title %}About{% endblock title %}
+
+{% block content %}
+<h1 class="display-3 text-center text-info">About</h1>
+<span class="img-container">
+<img src="{% static 'images/eric.jpg' %}" style="height: 200px; width: auto; border-radius: 50%;">
+</span>
+<br><br>
+
+<p class="lead text-center">Hi! My name is Eric. I am a rising senior at Montgomery Blair High School. This blog is for me to share things I like and find interesting. You'll find an assortment
+    of topics; feel free to look around. There's a search bar for your convenience. The toggle on the home page is for dark mode, which I believe makes the website look significantly better. This website
+    was made using Django, and you can read about the creation process in my first blog. If you have any questions, contact me at <a href="mailto:eric@echen.io">eric@echen.io</a>. <br>Enjoy!
+</p>
+<div class="text-center">{% icon 'headphones' height="50" width="50" %}</div>
+
+{% endblock content %}

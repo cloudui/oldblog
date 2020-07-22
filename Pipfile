@@ -11,6 +11,7 @@ django-feather = "*"
 pillow = "*"
 django-watson = "*"
 gunicorn = "*"
+django-tinymce = "*"
 
 [requires]
 python_version = "3.7"

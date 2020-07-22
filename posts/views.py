@@ -14,10 +14,16 @@ class HomePageView(ListView):
     paginate_by = 5
     context_object_name = 'posts'
 
+    def get_queryset(self):
+        return Post.objects.filter(visible=True)
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'detail.html'
 
+    
+class AboutPageView(TemplateView):
+    template_name = 'about.html'
 
 
 class SearchResultsListView(ListView):
@@ -31,7 +37,7 @@ class SearchResultsListView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('ques')
-        search_results = watson.filter(Post, query)
+        search_results = watson.filter(Post, query).filter(visible=True)
               
         return search_results
     

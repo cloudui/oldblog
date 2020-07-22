@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # downloads
     'django_feather',
     'watson',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,16 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 
 
+TINYMCE_DEFAULT_CONFIG = {
+  "theme": "silver",
+        "height": 400,
+        "menubar": False,
+        "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,codesample, code"
+        "searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,paste,"
+        "code,help,wordcount",
+        "toolbar": "undo redo | "
+        "bold italic backcolor | alignleft aligncenter "
+        "alignright | bullist numlist outdent indent | codesample | code |"
+        "help",
+        'branding': False,
+}
