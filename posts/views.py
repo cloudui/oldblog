@@ -26,7 +26,11 @@ class PostDetailView(DetailView):
         
         
         if not self.get_object().visible:
-                raise Http404
+            print(self.get_object().visible)
+            raise Http404
+        
+        return super().dispatch(request, *args, **kwargs)
+                
 
     
 class AboutPageView(TemplateView):
