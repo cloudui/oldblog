@@ -15,22 +15,23 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </head>
     <body>
+      
         <script>
             let darkmode = localStorage.getItem('darkmode');
             var toggle = document.querySelector('#checkBox')
             
             if (darkmode === 'enabled') {
                 document.body.classList.add('dark-mode');
-
+                
                 
                 window.onload = function() {
                     var toggle = document.querySelector('#checkBox')
                     var slider = document.querySelector('#slider')
                     
-                
+                    $('#sun').show();
                     
                                         
                     toggle.checked=true;
@@ -40,6 +41,12 @@
                 }
                 
             }
+            else {
+                window.onload = function() {
+                  $('#moon').show();
+                }
+            }
+            
             
         </script>
 
@@ -54,11 +61,14 @@
                 <span class="dot" style="background-color:#5bc0de;"></span>
                 <span class="dot" style="background-color:#a45fed;"></span>
             </div>
-            <span style="float:right;">
+            <span style="float:right; vertical-align: middle;">
+              <!-- <p></p> -->
             <label class="switch">
                 <input id="checkBox" type="checkbox">
                 <span id="slider" class="slider round"></span>
               </label>
+              <span id="sun" style="position: relative; bottom: 5px; display: none; transition: .2s;">{% icon 'sun' %}</span>
+              <span id="moon" style="position: relative; bottom: 5px; display: none; transition: .2s;">{% icon 'moon' %}</span>
               <br>
             </span>
             <br>
@@ -106,7 +116,7 @@
 
 
         
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/shortcuts/infinite.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -120,6 +130,9 @@
             const enableDarkMode = () => {
               document.body.classList.add('dark-mode');
               localStorage.setItem('darkmode','enabled');
+              $('#sun').show();
+              $('#moon').hide();
+
             
               
               
@@ -128,6 +141,8 @@
                 document.body.style.transition = ".3s"
               document.body.classList.remove('dark-mode'); 
               localStorage.setItem('darkmode', null);
+              $('#sun').hide();
+              $('#moon').show();
             
             };
 

@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Post
 
+from django.http import Http404
 from watson import search as watson
 
 
@@ -20,6 +21,12 @@ class HomePageView(ListView):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'detail.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        
+        
+        if not self.get_object().visible:
+                raise Http404
 
     
 class AboutPageView(TemplateView):
@@ -41,3 +48,5 @@ class SearchResultsListView(ListView):
               
         return search_results
     
+class ZoomLinks(TemplateView):
+    template_name = 'zoom.html'
