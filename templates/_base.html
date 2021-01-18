@@ -31,7 +31,7 @@
                     var toggle = document.querySelector('#checkBox')
                     var slider = document.querySelector('#slider')
                     
-                    $('#sun').show();
+                    $('#moon').show();
                     
                                         
                     toggle.checked=true;
@@ -43,7 +43,7 @@
             }
             else {
                 window.onload = function() {
-                  $('#moon').show();
+                  $('#sun').show();
                 }
             }
             
@@ -130,8 +130,8 @@
             const enableDarkMode = () => {
               document.body.classList.add('dark-mode');
               localStorage.setItem('darkmode','enabled');
-              $('#sun').show();
-              $('#moon').hide();
+              $('#moon').show();
+              $('#sun').hide();
 
             
               
@@ -141,8 +141,8 @@
                 document.body.style.transition = ".3s"
               document.body.classList.remove('dark-mode'); 
               localStorage.setItem('darkmode', null);
-              $('#sun').hide();
-              $('#moon').show();
+              $('#moon').hide();
+              $('#sun').show();
             
             };
 
