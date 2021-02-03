@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+
 }
 #title {
     padding-top: 20px;
@@ -179,4 +180,42 @@ form.example::after {
   content: "";
   clear: both;
   display: table;
+}
+
+img {
+  margin-top: 1em;
+}
+
+.figure-caption {
+  font-size: small;
+  margin-top: 4px;
+  margin-bottom: 2em;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+
+  width: 180px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: 100%;
 }
