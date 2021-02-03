@@ -5,6 +5,7 @@ class Post(models.Model):
     title = models.CharField(max_length=250, default="")
 
     body = HTMLField(blank=True)
+    body_short = models.TextField(blank=True, null=True)
 
     date_published = models.DateTimeField(auto_now_add=True)
     
@@ -12,16 +13,16 @@ class Post(models.Model):
 
     visible = models.BooleanField(default=True)
 
-    thumbnail = models.ImageField(upload_to='images', blank=True)
-    caption_url = models.URLField(blank=True)
+    # thumbnail = models.ImageField(upload_to='images', blank=True)
+    # caption_url = models.URLField(blank=True)
 
-    tag = models.CharField(max_length=100, blank=True)
+    # tag = models.CharField(max_length=100, blank=True)
 
     class Meta:
         ordering = ['-date_published']
     
     def date_short(self):
-        return self.date_published.strftime("%b %d, %Y")
+        return self.date_published.strftime("%b %-d, %Y")
 
     def body_trimmed(self):
         br_first_index = self.body.find('</p>')
@@ -35,3 +36,7 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+
+class Image(models.Model):
+    title = models.CharField(max_length=250, default="")
+    path = models.ImageField(upload_to='images', blank=True)

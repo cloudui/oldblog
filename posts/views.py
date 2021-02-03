@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import TemplateView, ListView, DetailView
-from .models import Post
+from .models import Post, Image
 
 from django.http import Http404
 from watson import search as watson
@@ -54,3 +54,9 @@ class SearchResultsListView(ListView):
     
 class ZoomLinks(TemplateView):
     template_name = 'zoom.html'
+
+
+class ImageView(ListView):
+    model = Image
+    context_object_name = 'images'
+    template_name = 'images.html'

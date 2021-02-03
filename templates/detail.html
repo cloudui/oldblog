@@ -6,9 +6,11 @@
 
 {% block content %}
 <p class="lead text-secondary">{% icon 'arrow-left' height="18" width="18" class="text-secondary" %} <a class="text-secondary" href="{% url 'home' %}"> Posts</a></p>
-<h1>{{ object.title }}</h1>
+<h1><strong>{{ object.title }}</strong></h1>
 <p class="text-secondary lead">{{ object.date_short }}</p>
 <br>
+
+{% comment %}
 {% if object.thumbnail %}
 <span class="img-container">
     <figure>
@@ -21,6 +23,7 @@
 <br>
 
 {% endif %}
+{% endcomment %}
 
 
 

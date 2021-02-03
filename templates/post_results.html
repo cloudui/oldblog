@@ -28,12 +28,12 @@
 <h2>{{ post_results.count }} matching results for "{{ search }}"</h2>
 {% endif %}
 
-{% for post in post_results reversed %}
+{% for post in post_results %}
 
 <h3 class="mb-0 mt-4"><strong><a class="text-info" href="{% url 'detail' post.slug %}">{{ post.title }}</a></strong></h3>
 <p class="text-secondary">{{ post.date_short }}</p>
 
-<div class="lead">{{ post.body_trimmed|safe }}</div>
+<p class="lead">{{ post.body_short }}</p>
 <p><a class="text-info" href="{% url 'detail' post.slug %}">Continue Reading</a></p>
 <br>
 {% endfor %}

@@ -1,0 +1,25 @@
+{% extends '_base2.html' %}
+{% load icon %}
+
+
+{% block title %}Images &middot; blog.echen.io{% endblock title %}
+
+{% block content %}
+
+<h1>Images</h1>
+<br>
+
+{% for image in images %}
+
+<div class="gallery">
+    <a target="_blank" href="{{ image.path.url }}"><img class="img-size" src="{{ image.path.url }}" alt="{{ image.title }}"></a>
+    
+</div>
+
+
+{% endfor %}
+
+<br>
+<br>
+
+{% endblock %}
