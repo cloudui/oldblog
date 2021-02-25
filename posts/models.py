@@ -9,6 +9,7 @@ class Post(models.Model):
     body_short = models.TextField(blank=True, null=True)
 
     date_published = models.DateTimeField(auto_now_add=True)
+    date_edited = models.DateTimeField(auto_now=True)
     
     slug = models.CharField(max_length=1000, null=True)
 
@@ -39,6 +40,10 @@ class Post(models.Model):
         return self.title
     def get_absolute_url(self):
         return reverse('detail', args=[str(self.slug)])
+    
+    def date_edited_short(self):
+        return self.date_edited.strftime("%b %-d, %Y at %-I:%M %p")
+        
 
 class Image(models.Model):
     title = models.CharField(max_length=250, default="")
