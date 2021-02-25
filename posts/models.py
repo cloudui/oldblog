@@ -1,6 +1,7 @@
 from django.db import models
 from tinymce.models import HTMLField
 from django.urls import reverse_lazy, reverse
+from django.utils import timezone 
 
 class Post(models.Model):
     title = models.CharField(max_length=250, default="")
@@ -24,7 +25,8 @@ class Post(models.Model):
         ordering = ['-date_published']
     
     def date_short(self):
-        return self.date_published.strftime("%b %-d, %Y")
+        date = timezone.localtime(self.date_published)
+        return date.strftime("%b %-d, %Y")
 
     def body_trimmed(self):
         br_first_index = self.body.find('</p>')
