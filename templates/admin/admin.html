@@ -21,7 +21,11 @@
     <a class="text-secondary mx-1" href="{% url 'update' post.slug %}">{% icon 'edit' height="18" width="18" %}</a>
     <a class="text-secondary mx-1" href="{% url 'delete' post.slug %}">{% icon 'trash-2' height="18" width="18" %}</a>
     <a class="text-secondary mx-1" href="{% url 'detail' post.slug %}" target="_blank">{% icon 'external-link' height="18" width="18" %}</a>
-    <a class="text-secondary mx-1" href=#>{% icon 'eye' height="18" width="18" %}</a>
+  {% if post.visible %}
+    <a class="text-secondary mx-1">{% icon 'eye' height="18" width="18" %}</a>
+  {% else %}
+  <a class="text-secondary mx-1">{% icon 'eye-off' height="18" width="18" %}</a>
+  {% endif %}
 
   </p>
 </div>
