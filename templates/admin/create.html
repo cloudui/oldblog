@@ -1,0 +1,23 @@
+{% extends '_base2.html' %}
+{% load crispy_forms_tags %}
+{% load icon %}
+
+{% block title %}Create{% endblock title %}
+
+{% block others %}
+
+{{ form.media }}
+
+{% endblock others %}
+
+{% block content %}
+    <h1>New Post</h1>
+    <br>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <button class="btn btn-success" type="submit">Create</button>
+    </form>
+    <br>
+{% endblock content %}

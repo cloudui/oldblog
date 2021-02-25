@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import TemplateView, ListView, DetailView
@@ -9,7 +9,12 @@ from watson import search as watson
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy, reverse_lazy
+
+from django.utils.text import slugify
+
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 class HomePageView(ListView):
@@ -26,18 +31,31 @@ class PostDetailView(DetailView):
     template_name = 'detail.html'
 
     def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
         
-        
-        if not self.get_object().visible:
-            print(self.get_object().visible)
-            raise Http404
+        if not obj.visible:
+            if self.request.user.is_authenticated:
+                if self.request.user.is_staff:
+                    return redirect('preview', obj.slug)
+            else:
+                raise Http404
         
         return super().dispatch(request, *args, **kwargs)
 
 class PostPreviewView(DetailView):
     model = Post
-    template_name = 'detail.html'
+    template_name = 'admin/detail.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        
+        
+        if self.request.user.is_authenticated:
+            if not self.request.user.is_staff:
+                raise PermissionDenied
+        else:
+            raise PermissionDenied
+        
+        return super().dispatch(request, *args, **kwargs)
                 
 
     
@@ -69,13 +87,18 @@ class ImageView(ListView):
     context_object_name = 'images'
     template_name = 'images.html'
 
-
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Post
-    template_name = 'update.html'
-    fields = '__all__'
-    login_url = 'account_login'
     context_object_name = 'post'
+    template_name = 'admin/create.html'
+    fields = ('title', 'body', 'body_short',)
+    login_url = 'login'
+    success_message = 'Post Created'
+    
+    def form_valid(self, form):
+        form.instance.slug = slugify(form.instance.title)
+
+        return super(PostCreateView, self).form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
         
@@ -83,7 +106,54 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         if self.request.user.is_authenticated:
             if not self.request.user.is_staff:
                 raise PermissionDenied
-        else:
-            raise PermissionDenied
         
         return super().dispatch(request, *args, **kwargs)
+
+class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Post
+    template_name = 'admin/update.html'
+    fields = '__all__'
+    login_url = 'login'
+    context_object_name = 'post'
+    success_message = 'Post Edited'
+
+    def dispatch(self, request, *args, **kwargs):
+        
+        
+        if self.request.user.is_authenticated:
+            if not self.request.user.is_staff:
+                raise PermissionDenied
+        
+        return super().dispatch(request, *args, **kwargs)
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'admin/delete.html'
+    login_url = 'login'
+    context_object_name = 'post'
+    success_url = reverse_lazy('admin')
+
+    def dispatch(self, request, *args, **kwargs):
+        
+        
+        if self.request.user.is_authenticated:
+            if not self.request.user.is_staff:
+                raise PermissionDenied
+        
+        return super().dispatch(request, *args, **kwargs)
+
+
+class PostAdminView(LoginRequiredMixin, ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'admin/admin.html'
+    login_url = 'login'
+    
+    def dispatch(self, request, *args, **kwargs):
+        
+        
+        if self.request.user.is_authenticated:
+            if not self.request.user.is_staff:
+                raise PermissionDenied        
+        return super().dispatch(request, *args, **kwargs)
+

@@ -1,0 +1,36 @@
+{% extends '_base2.html' %}
+{% load icon %}
+
+{% block title %}Admin Page{% endblock title %}
+{% block content %}
+
+<h1>Admin Page</h1>  
+
+
+<span style="float:right"><a class="text-secondary" href="{% url 'create' %}">{% icon 'file-plus' height="20" width="20" %}</a></span><br>
+{% for post in posts %}
+
+
+<h3 class="mb-0 mt-4"><strong><a class="text-info" href="{% url 'preview' post.slug %}">{{ post.title }}</a></strong>
+  </h3>
+  <p class="text-secondary">{{ post.date_short }}</p>
+  
+  <p class="lead">{{ post.body_short|safe }}</p>
+  <div class="edit-bar">
+  <p>
+    <a class="text-secondary mx-1" href="{% url 'update' post.slug %}">{% icon 'edit' height="18" width="18" %}</a>
+    <a class="text-secondary mx-1" href="{% url 'delete' post.slug %}">{% icon 'trash-2' height="18" width="18" %}</a>
+    <a class="text-secondary mx-1" href="{% url 'detail' post.slug %}" target="_blank">{% icon 'external-link' height="18" width="18" %}</a>
+    <a class="text-secondary mx-1" href=#>{% icon 'eye' height="18" width="18" %}</a>
+
+  </p>
+</div>
+
+<br>
+
+{% endfor %}
+
+
+
+{% endblock content %}
+

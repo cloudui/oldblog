@@ -1,0 +1,35 @@
+{% extends '_base2.html' %}
+{% load icon %}
+
+
+{% block title %}{{ object.title }} &middot; blog.echen.io{% endblock title %}
+
+{% block content %}
+
+{% if post.visible %}
+<div class="alert alert-success text-center mb-0 p-1" role="alert">
+    This post is visible
+</div>
+{% else %}
+<div class="alert alert-secondary text-center mb-0 p-1" role="alert">
+    This post is invisible
+</div>
+{% endif %}
+<br>
+
+<p class="lead text-secondary">{% icon 'arrow-left' height="18" width="18" class="text-secondary" %} <a class="text-secondary" href="{% url 'admin' %}"> Admin</a></p>
+<h1><strong>{{ object.title }}</strong>
+
+
+    <span style="float:right; position: relative; bottom: 3px;"><a class="text-secondary" href="{% url 'update' post.slug %}">{% icon 'edit' height="20" width="20" %}</a></span>
+
+</h1>
+<p class="text-secondary lead">{{ object.date_short }}</p>
+<br>
+
+
+
+<div class="lead">{{ post.body|safe }}</div>
+<br>
+
+{% endblock %}
