@@ -31,9 +31,7 @@
 
 <div class="lead">{{ post.body|safe }}</div>
 <br>
-{% if post.diff_date %}
 <span style="float:right;">Last updated: <i>{{ post.date_edited_short }}</i></span>
 <br>
-{% endif %}
 
 {% endblock %}
