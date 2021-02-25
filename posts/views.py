@@ -51,11 +51,11 @@ class SearchResultsListView(ListView):
     template_name = 'post_results.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['search'] = self.request.GET.get('ques')
+        context['search'] = self.request.GET.get('q')
         return context 
 
     def get_queryset(self):
-        query = self.request.GET.get('ques')
+        query = self.request.GET.get('q')
         search_results = watson.filter(Post, query).filter(visible=True)
               
         return search_results
