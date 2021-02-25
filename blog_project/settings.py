@@ -169,3 +169,4 @@ TINYMCE_DEFAULT_CONFIG = {
         'extended_valid_elements': 'figcaption[class=figure-caption text-center small]',
 }
 
+X_FRAME_OPTIONS = 'sameorigin'

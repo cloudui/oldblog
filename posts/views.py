@@ -75,7 +75,6 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'update.html'
     fields = '__all__'
     login_url = 'account_login'
-    success_url = reverse_lazy('home')
     context_object_name = 'post'
 
     def dispatch(self, request, *args, **kwargs):

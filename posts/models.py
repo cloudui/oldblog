@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+from django.urls import reverse_lazy, reverse
 
 class Post(models.Model):
     title = models.CharField(max_length=250, default="")
@@ -36,6 +37,8 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        return reverse('detail', args=[str(self.slug)])
 
 class Image(models.Model):
     title = models.CharField(max_length=250, default="")
