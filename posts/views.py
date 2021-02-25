@@ -30,6 +30,11 @@ class PostDetailView(DetailView):
             raise Http404
         
         return super().dispatch(request, *args, **kwargs)
+
+class PostPreviewView(DetailView):
+    model = Post
+    template_name = 'detail.html'
+    
                 
 
     
