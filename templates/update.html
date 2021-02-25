@@ -1,5 +1,6 @@
 {% extends '_base2.html' %}
 {% load crispy_forms_tags %}
+{% load icon %}
 
 {% block title %}Edit{% endblock title %}
 
@@ -10,7 +11,10 @@
 {% endblock others %}
 
 {% block content %}
-    <h1>Edit '{{ post.title }}'</h1>
+    <h1>Edit '{{ post.title }}'
+
+        <span style="float:right; position: relative; bottom: 3px;"><a target="_blank" class="text-secondary" href="{% url 'preview' post.slug %}">{% icon 'external-link' height="20" width="20" %}</a></span>
+    </h1>
     <br>
     <form action="" method="post">
         {% csrf_token %}
