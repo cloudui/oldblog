@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load icon %}
 
 
 {% block content %}
@@ -17,7 +18,11 @@
 {% for post in posts %}
 <div class="infinite-item">
 
-<h3 class="mb-0 mt-4"><strong><a class="text-info" href="{% url 'detail' post.slug %}">{{ post.title }}</a></strong></h3>
+<h3 class="mb-0 mt-4"><strong><a class="text-info" href="{% url 'detail' post.slug %}">{{ post.title }}</a></strong>
+{% if request.user.is_staff %}
+<span><a class="text-secondary" href="{% url 'update' post.slug %}">{% icon 'edit' style="position: relative; bottom: 3px;" height="18" width="18" %}</a></span>
+{% endif %}
+</h3>
 <p class="text-secondary">{{ post.date_short }}</p>
 
 <p class="lead">{{ post.body_short }}</p>

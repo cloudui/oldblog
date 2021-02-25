@@ -1,3 +1,5 @@
 ngrok
 .env
 db.sqlite3
+media/images/*
+media/_versions/images/*

@@ -10,4 +10,5 @@ urlpatterns = [
     path('images/', ImageView.as_view(), name='images'),
     path('preview/<slug:slug>/', PostPreviewView.as_view(), name='post_preview'),
     path('<slug:slug>/', PostDetailView.as_view(), name='detail'),
+    path('<slug:slug>/edit', PostUpdateView.as_view(), name='update'),
 ]

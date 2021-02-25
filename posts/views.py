@@ -6,7 +6,10 @@ from .models import Post, Image
 
 from django.http import Http404
 from watson import search as watson
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.urls import reverse_lazy, reverse
 
 
 class HomePageView(ListView):
@@ -34,7 +37,7 @@ class PostDetailView(DetailView):
 class PostPreviewView(DetailView):
     model = Post
     template_name = 'detail.html'
-    
+
                 
 
     
@@ -65,3 +68,23 @@ class ImageView(ListView):
     model = Image
     context_object_name = 'images'
     template_name = 'images.html'
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    template_name = 'update.html'
+    fields = '__all__'
+    login_url = 'account_login'
+    success_url = reverse_lazy('home')
+    context_object_name = 'post'
+
+    def dispatch(self, request, *args, **kwargs):
+        
+        
+        if self.request.user.is_authenticated:
+            if not self.request.user.is_staff:
+                raise PermissionDenied
+        else:
+            raise PermissionDenied
+        
+        return super().dispatch(request, *args, **kwargs)

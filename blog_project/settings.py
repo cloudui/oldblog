@@ -36,6 +36,8 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +51,9 @@ INSTALLED_APPS = [
     'django_feather',
     'watson',
     'tinymce',
+    
+    
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -144,13 +149,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
+LOGIN_REDIRECT_URL = 'home'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 TINYMCE_DEFAULT_CONFIG = {
   "theme": "silver",
         "height": 800,
         "menubar": False,
-        "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,codesample, code"
+        "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,codesample, code,"
         "searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,paste,"
         "code,help,wordcount",
         "toolbar": "undo redo | styleselect font fontselect fontsizeselect |"
@@ -161,3 +168,4 @@ TINYMCE_DEFAULT_CONFIG = {
         'image_caption': True,
         'extended_valid_elements': 'figcaption[class=figure-caption text-center small]',
 }
+

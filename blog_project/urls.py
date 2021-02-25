@@ -17,8 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from filebrowser.sites import site
 
 urlpatterns = [
+    path('admin-admin-admin/filebrowser/', site.urls),
+    path('grappelli/', include('grappelli.urls')),
+    path('tinymce/', include('tinymce.urls')),
     path('admin-admin-admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    
     path('', include('posts.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
