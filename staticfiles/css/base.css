@@ -257,3 +257,7 @@ blockquote {
   padding: 0.1em 15px;
   quotes: "\201C""\201D""\2018""\2019";
 }
+
+.container {
+  max-width: 55rem;
+}
