@@ -7,5 +7,5 @@
   </h3>
   <p class="text-secondary">{{ post.date_short }}</p>
   
-  <p class="lead">{{ post.body_short|safe }}</p>
+  <p>{{ post.body_short|safe }}</p>
   <p><a class="text-info" href="{% url 'detail' post.slug %}">Continue Reading</a></p>
